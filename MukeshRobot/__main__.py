@@ -4,7 +4,6 @@ import time
 import asyncio
 from platform import python_version as y
 from sys import argv
-from pyrogram import version as pyrover
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram import version as telever
 from telegram.error import (
