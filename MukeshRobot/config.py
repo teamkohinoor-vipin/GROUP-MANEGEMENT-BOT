@@ -1,19 +1,17 @@
 class Config(object):
     LOGGER = True
-    API_ID =None 
-    API_HASH = ""
-    TOKEN = ""  
-    OWNER_ID=None
-    
-    SUPPORT_CHAT = "" 
+    API_ID = int(os.getenv("API_ID", 0))
+    API_HASH = os.getenv("API_HASH", "")
+    TOKEN = os.getenv("BOT_TOKEN", "")
+    OWNER_ID = int(os.getenv("OWNER_ID", 0))
+
+    SUPPORT_CHAT = ""
     START_IMG = ""
     EVENT_LOGS = ()
-    MONGO_DB_URI= ""
-   
-    DATABASE_URL = ""  # A sql database url from elephantsql.com
-    CASH_API_KEY = (
-        ""
-    )
+    MONGO_DB_URI = os.getenv("MONGO_DB_URI", "")
+
+    DATABASE_URL = os.getenv("DATABASE_URL", "")
+    CASH_API_KEY = ""
     TIME_API_KEY = ""
 
     
