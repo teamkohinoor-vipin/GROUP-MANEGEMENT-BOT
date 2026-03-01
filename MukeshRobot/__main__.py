@@ -610,8 +610,8 @@ def Source_about_callback(update: Update, context: CallbackContext):
         first_name = update.effective_user.first_name
         query.message.edit_caption(
             PM_START_TEXT.format(
-                escape_markdown(first_name), BOT_NAME, len(get_served_users()), len(get_served_chats())
-            ),
+    escape_markdown(first_name), BOT_NAME
+            )
             reply_markup=InlineKeyboardMarkup(buttons),
             parse_mode=ParseMode.MARKDOWN,
             timeout=60,
