@@ -1,3 +1,4 @@
+import os
 class Config(object):
     LOGGER = True
     API_ID = int(os.getenv("API_ID", 0))
