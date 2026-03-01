@@ -14,11 +14,9 @@ RUN apt update && apt install -y --no-install-recommends \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /root/MukeshRobot
+WORKDIR /app
 
-RUN git clone https://github.com/Noob-Mukesh/MukeshRobot /root/MukeshRobot
-
-COPY ./MukeshRobot/config.py ./MukeshRobot/MukeshRobot/
+COPY . .
 
 RUN pip install --upgrade pip setuptools
 RUN pip install -r requirements.txt
