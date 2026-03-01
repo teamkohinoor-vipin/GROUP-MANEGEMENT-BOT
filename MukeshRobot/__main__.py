@@ -2,6 +2,9 @@ import importlib
 import re
 import time
 import asyncio
+import os
+START_IMG = os.getenv("START_IMG")
+print("DEBUG START_IMG:", START_IMG)
 from platform import python_version as y
 from sys import argv
 from pyrogram import __version__ as pyrover
