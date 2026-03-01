@@ -4,6 +4,7 @@ import time
 import asyncio
 from platform import python_version as y
 from sys import argv
+from pyrogram import version as pyrover
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram import version as telever
 from telegram.error import (
@@ -106,8 +107,8 @@ USER_SETTINGS = {}
 
 for module_name in ALL_MODULES:
     imported_module = importlib.import_module("MukeshRobot.modules." + module_name)
-    if not hasattr(imported_module, "__mod_name__"):
-    imported_module.__mod_name__ = module_name
+    if not hasattr(imported_module, "mod_name"):
+        imported_module.mod_name = imported_module.name
 
     if imported_module.__mod_name__.lower() not in IMPORTED:
         IMPORTED[imported_module.__mod_name__.lower()] = imported_module
@@ -160,7 +161,7 @@ def start(update: Update, context: CallbackContext):
             if args[0].lower() == "help":
                 send_help(update.effective_chat.id, HELP_STRINGS)
             elif args[0].lower().startswith("ghelp_"):
-                mod = args[0].lower().split("", 1)[1]
+                mod = args[0].lower().split("_", 1)[1]
                 if not HELPABLE.get(mod, False):
                     return
                 send_help(
@@ -502,7 +503,7 @@ def MukeshRobot_Main_Callback(update: Update, context: CallbackContext):
                 ]
             ),
         )
-    elif query.data == "mukesh_back":
+    elif query.data == "expert_help":  # Fixed: this was incorrectly named "mukesh_back" in your previous version
         query.message.edit_caption(
             """Exᴘᴇʀᴛ ᴄᴏᴍᴍᴀɴᴅs 
 
@@ -555,36 +556,8 @@ Wᴀʀɴ Mᴀɴᴀɢᴇᴍᴇɴᴛ
                 ]
             ),
         )
-    elif query.data == "expert_help":
-        query.message.edit_caption(
-            f"""━━━━━━━━━━━━━━━━━━━━ 
-ᴍᴀᴋᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴇꜰꜰᴇᴄᴛɪᴠᴇ ɴᴏᴡ :
-🎉 ᴄᴏɴɢʀᴀɢᴜʟᴀᴛɪᴏɴꜱ 🎉
-{BOT_NAME} ɴᴏᴡ ʀᴇᴀᴅʏ ᴛᴏ
-ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ.
-ᴀᴅᴍɪɴ ᴛᴏᴏʟꜱ :
-ʙᴀꜱɪᴄ ᴀᴅᴍɪɴ ᴛᴏᴏʟꜱ ʜᴇʟᴘ ʏᴏᴜ ᴛᴏ
-ᴘʀᴏᴛᴇᴄᴛ & ᴘᴏᴡᴇʀᴜᴘ ʏᴏᴜʀ ɢʀᴏᴜᴘ.
-ʏᴏᴜ ᴄᴀɴ ʙᴀɴ, ᴋɪᴄᴋ, ᴘʀᴏᴍᴏᴛᴇ
-ᴍᴇᴍʙᴇʀꜱ ᴀꜱ ᴀᴅᴍɪɴ ᴛʜʀᴏᴜɢʜ ʙᴏᴛ.
-ɢʀᴇᴇᴛɪɴɢꜱ :
-ʟᴇᴛꜱ ꜱᴇᴛ ᴀ ᴡᴇʟᴄᴏᴍᴇ ᴍᴇꜱꜱᴀɢᴇ ᴛᴏ
-ᴡᴇʟᴄᴏᴍᴇ ɴᴇᴡ ᴜꜱᴇʀꜱ ᴄᴏᴍɪɴɢ ᴛᴏ
-ʏᴏᴜʀ ɢʀᴏᴜᴘ.
-ꜱᴇɴᴅ /setwelcome ᴍᴇꜱꜱᴀɢᴇ ᴛᴏ
-ꜱᴇᴛ ᴀ ᴡᴇʟᴄᴏᴍᴇ ᴍᴇꜱꜱᴀɢᴇ!""",
-            parse_mode=ParseMode.MARKDOWN,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton(text="• ʙᴀᴄᴋ •", callback_data="Main_help"),
-                        InlineKeyboardButton(
-                            text="• sᴜᴘᴘᴏʀᴛ •", callback_data="mukesh_support"
-                        ),
-                    ]
-                ]
-            ),
-        )
+    elif query.data == "expert_help":  # This was already handled above, but kept for clarity
+        pass
 
 def Source_about_callback(update: Update, context: CallbackContext):
     query = update.callback_query
